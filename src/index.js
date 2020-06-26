@@ -9,7 +9,7 @@ import * as serviceWorker from "./serviceWorker";
 
 import "./index.css";
 import App from "./containers/App";
-import { searchRobots, requestRobots } from "./reducers";
+import { searchRobots, requestRobots } from "./store/reducers";
 
 const logger = createLogger();
 

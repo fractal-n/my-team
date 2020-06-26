@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 
-import { setSearchField, requestRobots } from "../actions";
+import { setSearchField, requestRobots } from "../store/actions";
 
 import ErrorBoundry from "../components/ErrorBoundry";
 import Scroll from "../components/Scroll.js";

@@ -2,12 +2,13 @@
 
 ## About
 
-This is a simple frontend project to learn React.
+This is a simple frontend project to learn React and Redux.
 
 ## Tech stack
 
-ReactJS
-Tachycon (CSS toolkit)
+- ReactJS
+- Tachycon (CSS toolkit)
+- Redux
 
 ## Mockup tools
 
