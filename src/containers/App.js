@@ -1,16 +1,32 @@
 import React from "react";
-import "./App.css";
+import { connect } from "react-redux";
+
+import { setSearchField } from "../actions";
+
 import ErrorBoundry from "../components/ErrorBoundry";
 import Scroll from "../components/Scroll.js";
 import CardList from "../components/CardList";
 import SearchBox from "../components/SearchBox";
+
+import "./App.css";
+
+const mapStateToProps = (state) => {
+  return {
+    searchField: state.searchRobots.searchField,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onSearchChange: (event) => dispatch(setSearchField(event.target.value)),
+  };
+};
 
 class App extends React.Component {
   constructor() {
     super();
     this.state = {
       robots: [],
-      searchTerm: "",
     };
   }
 
@@ -20,17 +36,14 @@ class App extends React.Component {
       .then((users) => this.setState({ robots: users }));
   }
 
-  onSearchChange = (event) => {
-    this.setState({ searchTerm: event.target.value });
-  };
-
   render() {
-    const { robots, searchTerm } = this.state;
+    const { robots } = this.state;
+    const { searchField, onSearchChange } = this.props;
 
     const filtered = robots.filter(
       (robot) =>
-        robot.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        robot.email.toLowerCase().includes(searchTerm.toLowerCase())
+        robot.name.toLowerCase().includes(searchField.toLowerCase()) ||
+        robot.email.toLowerCase().includes(searchField.toLowerCase())
     );
 
     if (!robots.length) {
@@ -40,7 +53,7 @@ class App extends React.Component {
     return (
       <div className="tc">
         <h1 className="f1">My Team</h1>
-        <SearchBox searchChange={this.onSearchChange} />
+        <SearchBox searchChange={onSearchChange} />
         <Scroll>
           <ErrorBoundry>
             <CardList items={filtered} />
@@ -51,4 +64,4 @@ class App extends React.Component {
   }
 }
 
-export default App;
+export default connect(mapStateToProps, mapDispatchToProps)(App);
